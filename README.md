@@ -38,22 +38,45 @@ It automatically classifies typical defects such as high caps, crooked caps, and
 
 ---
 
+
 ## Workflow  
+The overall workflow consists of image acquisition, preprocessing, cap detection, classification, and real-time result computation.  
 
-### Initialization 
-- Captures the label region to define bottle boundaries.  
-- Applies binary conversion and flood-fill cleanup.  
-- Determines detection range based on label edge coordinates.  
+### 1. Main Routine (`main()`)  
+- Initializes the camera using `VideoCapture()` and sets frame resolution.  
+- Captures each frame and clones it for independent processing.  
+- Calls the initialization function `initial()` to locate the bottle region.  
+- If **no bottle is detected**, a blue bounding box highlights the detection area with the prompt *“No Bottle Detected”*.  
+- If a bottle is found, the system sequentially processes each one using `cap_scan()` for cap state evaluation.  
 
-### Cap Detection 
-- Processes each bottle’s cap region individually.  
-- Analyzes the number and orientation of detected rectangles.  
-- Classifies cap condition as *normal*, *tilted*, *high*, or *missing*.  
+### 2. Initialization Stage (`initial()`)  
+- Extracts the label region to limit processing area.  
+- Converts the region to grayscale and applies binary thresholding.  
+- Performs inversion and `floodFill()` to remove internal holes.  
+- Detects the upper green edge of the label to define left and right boundary coordinates for each bottle.  
 
-### Result Computation  
-- Press **Tab** → Calculate the current batch’s defect ratios and pass rate.  
-- Press **Enter** → Summarize total detection statistics.  
-- Press **ESC** → End inspection.
+### 3. Cap Detection Stage (`cap_scan()`)  
+- Focuses on the cap area based on coordinates from `initial()`.  
+- Applies morphological filtering and contour extraction.  
+- Calculates the number of cap contours and their slopes using `minAreaRect()`.  
+- If **two rectangles** are found → classify as *High Cap* or *Crooked Cap*.  
+- If **one rectangle** is found → further compare cap slope and area to determine *Normal*, *Missing*, or *Tilted* state.  
+
+### 4. Bottle Body Analysis (`bottle_body()`)  
+- Detects the top edge of the label area using edge detection.  
+- Compares the slope of the cap and the label to evaluate parallelism and determine sealing quality.  
+
+### 5. Result Computation & Display  
+- Press **Tab** → Calculates and displays statistics for the current detection cycle, including total bottles, pass rate, and defect ratios.  
+- Press **Enter** → Summarizes all recorded results for the full session.  
+- Press **ESC** → Ends inspection and resets temporary data.  
+
+### 6. Output and Visualization  
+- Draws colored rectangles around detected caps.  
+- Annotates detection results (e.g., *Normal*, *Crooked*, *High Cap*, *Missing*, *No Bottle*).  
+- Displays real-time camera feed and classification overlays through `imshow()`.  
+
+View the full source code here: [View Code on GitHub](./Code)
 
 
 ---
@@ -67,6 +90,7 @@ It automatically classifies typical defects such as high caps, crooked caps, and
 | Crooked Cap | Cap is loosely tightened and appears tilted on the bottle neck | ![Crooked Cap](Img/Crooked_Cap.png) |
 | High Cap | Cap is incompletely tightened (sitting high or partially threaded) | ![High Cap](Img/High_Cap.png) |
 | Missing Cap | Bottle detected, but no cap region found | ![Missing Cap](Img/Missing_Cap.png) |
+| Final Detection Results | The system compiles all detection records | ![Result](Img/Result.png) |
 
 
 ---
