@@ -77,7 +77,7 @@ The overall workflow consists of image acquisition, preprocessing, cap detection
 - Detects the top edge of the label area using edge detection.  
 - Compares the slope of the cap and the label to evaluate parallelism and determine sealing quality.  
 
-### 5. Result Computation & Display  
+### 5. Result Computation and Display  
 - Press **Tab** → Calculates and displays statistics for the current detection cycle, including total bottles, pass rate, and defect ratios.  
 - Press **Enter** → Summarizes all recorded results for the full session.  
 - Press **ESC** → Ends inspection and resets temporary data.  
