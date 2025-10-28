@@ -51,10 +51,11 @@ It automatically classifies typical defects such as high caps, crooked caps, and
 
 | Status | Description | Example |
 |---------|--------------|---------|
-| ✅ Normal Cap | Properly tightened and parallel to label | ![normal cap](img/normal.jpg) |
-| ⚠️ Crooked Cap | Tilted cap with non-parallel edges | ![crooked cap](img/crooked.jpg) |
-| ⚠️ High Cap | Detected dual rectangles (lifted cap) | ![high cap](img/high.jpg) |
-| ❌ Missing Cap | No cap region detected | ![missing cap](img/missing.jpg) |
+| No Bottle Detected | No bottle identified within the detection region | ![No Bottle Detected](Img/No bottle_detected.jpg) |
+| Normal Cap | Cap is properly tightened and fully sealed on the bottle neck | ![Normal Cap](Img/Normal_Cap.jpg) |
+| Crooked Cap | Cap is loosely tightened and appears tilted on the bottle neck | ![Crooked Cap](Img/Crooked_Cap.jpg) |
+| High Cap | Cap is incompletely tightened (sitting high or partially threaded) | ![High Cap](Img/High_Cap.jpg) |
+| Missing Cap | Bottle detected, but no cap region found | ![Missing Cap](Img/Missing_Cap.jpg) |
 
 ---
 
