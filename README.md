@@ -8,6 +8,17 @@ It automatically classifies typical defects such as high caps, crooked caps, and
 ---
 
 
+## Table of Contents
+- [Features](#features)  
+- [Technical Details](#technical-details)  
+- [Workflow](#workflow)  
+- [Results](#results)  
+- [Tools and Environment](#tools-and-environment)  
+
+
+---
+
+
 ## Features  
 - **Real-time Detection:** Uses external camera to monitor bottle caps continuously.  
 - **Edge & Contour Analysis:** Identifies bottle caps via edge detection, contour extraction, and area filtering.  
@@ -96,7 +107,7 @@ View the full source code here: [View Code on GitHub](./Code)
 ---
 
 
-## Tools & Environment  
+## Tools and Environment  
 - **Language:** C++  
 - **Library:** OpenCV  
 - **IDE:** Visual Studio  
